@@ -7,25 +7,22 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {saveUser} from '../data/data';
+import {saveUser} from '../../data/Data';
 
 const Signup = ({navigation}: {navigation: any}) => {
-  const [user, setuser] = React.useState('');
-  const [pass, setpass] = React.useState('');
-  const [id, setid] = React.useState('');
-  const [name, setname] = React.useState('');
+  const [user, setUser] = React.useState('');
+  const [pass, setPass] = React.useState('');
+  const [id, setId] = React.useState('');
+  const [name, setName] = React.useState('');
   const regex =
     /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/;
   const comp = () => {
-    setid('');
-    setid('');
-    setid('');
     if (regex.test(pass)) {
       saveUser(id, name, user, pass);
-      setid('');
-      setpass('');
-      setuser('');
-      setname('');
+      setId('');
+      setPass('');
+      setUser('');
+      setName('');
     } else {
       Alert.alert('recuerde seguir las instrucciones');
     }
@@ -33,47 +30,47 @@ const Signup = ({navigation}: {navigation: any}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registro</Text>
-      <Text style={styles.texto}>Cedula</Text>
+      <Text style={styles.text2}>Cedula</Text>
       <TextInput
-        style={styles.ingreso}
+        style={styles.input}
         placeholder="Ingrese su Cedula"
         value={id}
-        onChangeText={text => setid(text)}
+        onChangeText={text => setId(text)}
       />
-      <Text style={styles.texto}>Usuario</Text>
+      <Text style={styles.text2}>Usuario</Text>
       <TextInput
-        style={styles.ingreso}
+        style={styles.input}
         placeholder="Ingrese un Usuario"
         value={user}
-        onChangeText={text => setuser(text)}
+        onChangeText={text => setUser(text)}
       />
-      <Text style={styles.texto}>Nombre</Text>
+      <Text style={styles.text2}>Nombre</Text>
       <TextInput
-        style={styles.ingreso}
+        style={styles.input}
         placeholder="Ingrese su Nombre"
         value={name}
-        onChangeText={text => setname(text)}
+        onChangeText={text => setName(text)}
       />
-      <Text style={styles.texto}>Contraseña</Text>
-      <Text style={styles.textcon}>
+      <Text style={styles.text2}>Contraseña</Text>
+      <Text style={styles.text3}>
         La contraseña tiene las siguientes características: Debe contener 8
         caracteres Una letra en mayúscula Una letra en minúscula Un numero Un
         carácter especial
       </Text>
       <TextInput
         secureTextEntry={true}
-        style={styles.ingreso}
+        style={styles.input}
         placeholder="Ingrese una Contraseña"
         value={pass}
-        onChangeText={text => setpass(text)}
+        onChangeText={text => setPass(text)}
       />
-      <TouchableOpacity onPress={() => comp()} style={styles.boton}>
+      <TouchableOpacity onPress={() => comp()} style={styles.button}>
         <Text style={styles.text}>Registrarse</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.inicio}
-        onPress={() => navigation.navigate('Inicio')}>
-        <Text style={styles.inite}>Iniciar Sesion</Text>
+        style={styles.login}
+        onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.log}>Iniciar Sesion</Text>
       </TouchableOpacity>
     </View>
   );
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#0834A9',
   },
-  ingreso: {
+  input: {
     backgroundColor: '#FFF',
     color: '#000',
     width: 400,
@@ -97,12 +94,12 @@ const styles = StyleSheet.create({
     borderColor: '#999',
     borderWidth: 1,
   },
-  texto: {
+  text2: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#FFF',
   },
-  boton: {
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
@@ -125,15 +122,15 @@ const styles = StyleSheet.create({
     color: '#FFF',
     bottom: 60,
   },
-  textcon: {
+  text3: {
     color: '#FFF',
     paddingHorizontal: 10,
     fontSize: 19,
   },
-  inicio: {
+  login: {
     marginTop: 30,
   },
-  inite: {
+  log: {
     fontSize: 20,
     color: '#FFF',
   },

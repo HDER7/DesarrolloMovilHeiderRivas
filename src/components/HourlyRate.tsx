@@ -3,47 +3,47 @@ import moment from 'moment';
 import React from 'react';
 import {View, StyleSheet,Text,TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { GHora } from '../data/data';
+import { saveHour } from '../../data/Data';
 
-const Rhoras = () => {
-    const [fecha, setDate] = React.useState(new Date());
-    const [h, seth] = React.useState(new Date());
-    const [ch, setch] = React.useState(0);
-    const [forma, setforma] = React.useState('AM');
-    const Time = moment().format('LT').slice(0,-2);
-    const togformat = () => {
-        setforma(forma === 'AM' ? 'PM' : 'AM');
+const HourlyRate = () => {
+    const [date, setDate] = React.useState(new Date());
+    const [hour, setHour] = React.useState(new Date());
+    const [hours, setHours] = React.useState(0);
+    const [format, setFormat] = React.useState('AM');
+    const Time = moment().format('LT');
+    const togFormat = () => {
+        setFormat(format === 'AM' ? 'PM' : 'AM');
     };
-    const cal = () => {
-        const time1 = new Date(fecha).getTime();
-        const time2 = new Date(h).getTime();
+    const save = () => {
+        const time1 = new Date(date).getTime();
+        const time2 = new Date(hour).getTime();
         const ti = Math.abs(time2 - time1);
         const ti2 = Math.round(ti / (1000 * 60 * 60));
-        setch(ti2);
-        GHora(fecha,(Time + forma),h,ti2);
+        setHours(ti2);
+        saveHour(date,(Time + format),(moment(hour).format('LT')),ti2);
     };
     return (
         <View style={styles.container}>
             <DatePicker
                 open={true}
                 mode="date"
-                date={fecha}
+                date={date}
                 onDateChange={setDate}
             />
-            <Text style={styles.text}>{Time} {forma}</Text>
-            <TouchableOpacity onPress={togformat} style={styles.toggleButton}>
+            <Text style={styles.text}>{Time} {format}</Text>
+            <TouchableOpacity onPress={togFormat} style={styles.toggleButton}>
                 <Text style={styles.toggleButtonText}>
-                    {forma === 'AM' ? 'Switch to PM' : 'Switch to AM'}
+                    {format === 'AM' ? 'Switch to PM' : 'Switch to AM'}
                 </Text>
             </TouchableOpacity>
             <DatePicker
                 open={true}
                 mode="time"
-                date={fecha}
-                onDateChange={seth}
+                date={date}
+                onDateChange={setHour}
             />
-            <Text style={styles.text}>Hora trabajadas: {ch}</Text>
-            <TouchableOpacity onPress={()=>cal()}>
+            <Text style={styles.text}>Hora trabajadas: {hours}</Text>
+            <TouchableOpacity onPress={()=>save()}>
                 <Text style={styles.button}>Guardar</Text>
             </TouchableOpacity>
         </View>
@@ -55,17 +55,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    ingreso: {
-        backgroundColor: '#FFF',
-        color: '#000',
-        width: 100,
-        borderRadius: 20,
-        margin: 10,
-        paddingLeft: 35,
-        fontSize: 18,
-        borderColor: '#999',
-        borderWidth: 1,
     },
     text: {
         fontSize: 20,
@@ -91,4 +80,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Rhoras;
+export default HourlyRate;

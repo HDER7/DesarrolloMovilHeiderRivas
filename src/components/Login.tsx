@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {buscaUser} from '../data/data';
+import {searchUser} from '../../data/Data';
 
 const Login = ({navigation}: {navigation: any}) => {
-  const [user, setuser] = React.useState('');
-  const [pass, setpass] = React.useState('');
-  const comp = () => {
-    if (buscaUser(user, pass)) {
-      navigation.navigate('Page', {nombre: user});
+  const [user, setUser] = React.useState('');
+  const [pass, setPass] = React.useState('');
+  const authenticate = () => {
+    if (searchUser(user, pass)) {
+      navigation.navigate('Profile', {name: user});
     } else {
       Alert.alert('El usuario no existe, Registrese');
     }
@@ -24,30 +24,30 @@ const Login = ({navigation}: {navigation: any}) => {
     <View style={styles.container}>
       <Image
         source={require('C:/Users/anfer/OneDrive/Escritorio/6 Semestre/Desarrollo movil/trabajadores_mina/img/1576640.png')}
-        style={styles.imagen}
+        style={styles.img}
       />
-      <Text style={styles.texto}>Usuario</Text>
+      <Text style={styles.text2}>Usuario</Text>
       <TextInput
-        style={styles.ingreso}
+        style={styles.input}
         placeholder="Usuario"
         value={user}
-        onChangeText={text => setuser(text)}
+        onChangeText={text => setUser(text)}
       />
-      <Text style={styles.texto}>Contraseña</Text>
+      <Text style={styles.text2}>Contraseña</Text>
       <TextInput
         secureTextEntry={true}
-        style={styles.ingreso}
+        style={styles.input}
         placeholder="Contraseña"
         value={pass}
-        onChangeText={text => setpass(text)}
+        onChangeText={text => setPass(text)}
       />
-      <TouchableOpacity onPress={() => comp()} style={styles.boton}>
+      <TouchableOpacity onPress={() => authenticate()} style={styles.button}>
         <Text style={styles.text}>Iniciar Sesion</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.registrar}
-        onPress={() => navigation.navigate('Registro')}>
-        <Text style={styles.regtext}>Registrarse</Text>
+        style={styles.register}
+        onPress={() => navigation.navigate('Signup')}>
+        <Text style={styles.rt}>Registrarse</Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#0834A9',
   },
-  ingreso: {
+  input: {
     backgroundColor: '#FFF',
     color: '#000',
     width: 400,
@@ -71,12 +71,12 @@ const styles = StyleSheet.create({
     borderColor: '#999',
     borderWidth: 1,
   },
-  texto: {
+  text2: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#FFF',
   },
-  boton: {
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
   },
-  imagen: {
+  img: {
     width: 206,
     height: 208,
   },
-  registrar: {
+  register: {
     marginTop: 30,
   },
-  regtext: {
+  rt: {
     fontSize: 20,
     color: '#FFF',
   },
