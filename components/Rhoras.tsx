@@ -39,7 +39,7 @@ const Rhoras = () => {
             <DatePicker
                 open={true}
                 mode="time"
-                date={h}
+                date={fecha}
                 onDateChange={seth}
             />
             <Text style={styles.text}>Hora trabajadas: {ch}</Text>
